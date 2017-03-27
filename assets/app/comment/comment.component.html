@@ -1,0 +1,34 @@
+<div class="col-md-8 col-md-offset-2" *ngIf="isOwnerOrAdmin()">
+    <form [formGroup]="myForm" (ngSubmit)="onEdit()">
+        <div class="form-group">
+            <label for="content">Content</label>
+            <input
+                    type="text"
+                    id="content"
+                    class="form-control"
+                    formControlName="content">
+        </div>
+        <div class="form-group">
+            <label for="commentDate">Commented On</label>
+            <input
+                    type="text"
+                    id="commentDate"
+                    class="form-control"
+                    formControlName="commentDate">
+        </div>
+
+        <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!myForm.valid">Save Changes</button>
+        <button (click)="onDelete()"
+                class="btn btn-primary"
+                type="submit"
+                >Delete Comment</button>
+    </form>
+
+</div>
+
+<div *ngIf="!isOwnerOrAdmin()">
+    Not owner or admin
+</div>

@@ -1,0 +1,12 @@
+1) finish add item method and present it in the itemlist component
+2) check if item component presents comment-input-component
+3) create comment list for each item
+4) create category page in client side , create getCategory method in server side
+5) ItemsComponent should hold app-item, app-comment-input, app-comment-list\
+6) add router.get(/:id) in items.js
+7) create item-details for item-list.component.ts, whenever we press the item-details link it will
+   navigate to item.component
+8) finish item.service.ts
+9) finish comment.service.ts
+10) create search component that will communicate with item.service.ts
+11)

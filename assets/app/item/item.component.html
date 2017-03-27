@@ -1,0 +1,88 @@
+<div class="col-md-8 col-md-offset-2" *ngIf="isAdmin()">
+    <form [formGroup]="myForm" (ngSubmit)="onEdit()">
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input
+                    type="text"
+                    id="category"
+                    class="form-control"
+                    formControlName="category">
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input
+                    type="text"
+                    id="title"
+                    class="form-control"
+                    formControlName="title">
+        </div>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <input
+                    type="text"
+                    id="content"
+                    class="form-control"
+                    formControlName="content">
+        </div>
+        <img src="{{item.pictureLink}}" style="width:30%">
+        <div class="form-group">
+            <label for="pictureLink">Link</label>
+            <input
+                    type="text"
+                    id="pictureLink"
+                    class="form-control"
+                    formControlName="pictureLink">
+
+        </div>
+        <div class="form-group">
+            <label for="publishDate">Publish Date</label>
+            <input
+                    type="text"
+                    id="publishDate"
+                    class="form-control"
+                    formControlName="publishDate">
+
+        </div>
+        <div class="form-group">
+            <label for="publisherEmail">Published By</label>
+            <input
+                    type="text"
+                    id="publisherEmail"
+                    class="form-control"
+                    formControlName="publisherEmail">
+
+        </div>
+        <div class="form-group">
+            <label for="grade">Grade</label>
+            <input
+                    type="number"
+                    id="grade"
+                    class="form-control"
+                    formControlName="grade">
+
+        </div>
+        <div *ngIf="allowToRate">
+        <button
+                (click)="addRateToItem()"
+                class="btn btn-primary"
+                type="button"
+                    >Rate this review!</button>
+        </div>
+        <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!myForm.valid">Save Changes</button>
+
+        <button (click)="onDelete()"
+                class="btn btn-primary"
+                type="button"
+        >Delete Review</button>
+    </form>
+   <app-comment-input [itemId]="item.itemId"></app-comment-input>
+    <app-comment-list [itemId]="item.itemId"></app-comment-list>
+</div>
+
+
+<div *ngIf="!isAdmin()">
+    Display Review By Text , use rate button from above
+</div>

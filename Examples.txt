@@ -1,0 +1,21 @@
+Example for item in DB:
+             title: 'asd',
+              category: 'asd',
+              content: 'asd',
+              publisher:
+               { _id: 58caa9e0a1677b3144fe726a,
+                 firstName: 'admin',
+                 lastName: 'admin',
+                 password: '$2a$10$HhZj.PvJexO1rQLDAVOJD.Nn03.Fz1qCOQgyBu3uxUfkXNihIt4ee',
+                 email: 'admin@gmail.com',
+                 __v: 0,
+                 graded: [],
+                 comments: [],
+                 role: 'admin' },
+              pictureLink: 'ca',
+              _id: 58cfe43162a51c24b403350b,
+              gradedBy: [],
+              grade: 0,
+              comments: [],
+              publishDate: 2017-03-20T14:16:17.698Z
+
