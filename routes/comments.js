@@ -125,6 +125,9 @@ router.delete('/:id',function (req,res,next) {
              error: {message: 'Comment not found in any review'}
              });
          }
+         if(items[0].comments!==undefined)
+         {
+
          for(var i=0;i<items[0].comments.length;i++)
          {
              if(items[0].comments[i].toString()===id)
@@ -136,6 +139,8 @@ router.delete('/:id',function (req,res,next) {
          Comment.findById(id).exec(function (err,comment) {
              comment.remove()
          })
+
+         }
 
     });
 

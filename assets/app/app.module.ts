@@ -29,8 +29,10 @@ import {SearchComponent} from "./search/search.component";
 import {AgmCoreModule} from 'angular2-google-maps/core';
 
 import {GoogleMapsComponent} from "./webservice/google-maps.component";
-import {ItemListHomePageComponent} from "./item/item-list-home-page.component";
 import {GoogleMapsService} from "./webservice/google-maps.service";
+import {ItemCategoryListComponent} from "./item/item-category-list.component";
+import {WeatherComponent} from "./webservice/weather-service.component";
+import {WeatherService} from "./webservice/weather.service";
 
 
 
@@ -51,10 +53,11 @@ import {GoogleMapsService} from "./webservice/google-maps.service";
         ItemComponent,
         ItemInputComponent,
         ItemListComponent,
-        ItemListHomePageComponent,
         CategoryListComponent,
         SearchComponent,
-        GoogleMapsComponent
+        GoogleMapsComponent,
+        ItemCategoryListComponent,
+        WeatherComponent
 
     ],
     imports: [ BrowserModule,
@@ -67,7 +70,7 @@ import {GoogleMapsService} from "./webservice/google-maps.service";
     ],
 
 
-    providers:[AuthService,ErrorService,CommentService,ItemService,GoogleMapsService],
+    providers:[AuthService,ErrorService,CommentService,ItemService,GoogleMapsService,WeatherService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -7,12 +7,11 @@ import {Router} from "@angular/router";
     selector:'app-category-list',
     styleUrls:['./item.component.css'],
     template:`  
-  
-             <div class="card" *ngFor="let category of categories">
-                 <img src="http://localhost:3000/public/{{category}}.jpg" style="width:100%">
-                  <div class="container">
-                    <a [routerLink]="['/item-list',category]">{{category}}</a>
-                  </div>
+        <div class="row">
+        <div class="col-sm-4" *ngFor="let category of categories">
+                 <a [routerLink]="['/item-category-list',category]"><b>{{category}}</b></a>
+                 <img src="/pictures/{{category}}.jpg" style="width:100%">
+                </div>
                 </div>
             `
 })

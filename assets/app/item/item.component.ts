@@ -23,14 +23,6 @@ export class ItemComponent implements OnInit{
                 private route: ActivatedRoute,private router:Router){}
 
 
-    /**
-     * TODO: add regex validator to picture link
-     * [
-     Validators.required,
-     Validators.pattern("")
-
-     ]
-     */
 
     ngOnInit()
     {
@@ -77,7 +69,6 @@ export class ItemComponent implements OnInit{
         this.item=item
         this.itemService.editItem(this.item)
             .subscribe(
-
                 result=> console.log(result),
             )
     }
@@ -89,7 +80,7 @@ export class ItemComponent implements OnInit{
             .subscribe(
                 result => {
                     console.log(result),
-                    this.router.navigateByUrl('item-list/')
+                    this.router.navigateByUrl('/')
                 }
 
             );
@@ -105,9 +96,7 @@ export class ItemComponent implements OnInit{
                     this.myForm.patchValue({
                         grade:this.item.grade
                     });
-/*
-                    this.router.navigateByUrl('item/'+this.item.itemId);
-*/
+                    document.getElementById('rateBtn').style.visibility = 'hidden';
                     }
                     )
     }

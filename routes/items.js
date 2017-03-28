@@ -140,20 +140,112 @@ router.get('/email/:email',function (req,res,next) {
  *
  */
 
-router.get('/d3/:graph1',function (req,res,next) {
-    Item.find()
+router.get('/d3/graph1',function (req,res,next) {
+   Item.aggregate([{$group:{"_id":"$category",Count:{$sum:1}}}]).exec(function (err,items) {
+       if (err) {
+           return res.status(500).json({
+               title: 'An error occurred',
+               error: err
+           });
+       }
+       if(!items)
+       {
+           return res.status(500).json({
+               title: 'No Item Found!',
+               error: {message: 'Item not found'}
+           });
+       }
+       console.log(items);
+       var data=[];
+       for(var i=0;i<items.length;i++)
+       {
+           var color='#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+           data.push({
+              "label":items[i]._id,
+              "value":items[i].Count,
+              "color":color
+          });
+       }
+
+       res.status(200).json({
+           message: 'Success',
+           obj: data
+       });
+   })
 
 
 });
 
 
-router.get('/d3/:graph2',function (req,res,next) {
+router.get('/d3/graph2',function (req,res,next) {
+
+    Item.find().sort({"grade":-1}).exec(function (err,items) {
+        if (err) {
+         return res.status(500).json({
+         title: 'An error occurred',
+         error: err
+         });
+         }
+         if(!items)
+         {
+         return res.status(500).json({
+         title: 'No Item Found!',
+         error: {message: 'Item not found'}
+         });
+         }
+
+        var data=[];
+        for(var i=0;i<items.length;i++)
+        {
+            if(i<10)
+            {
+                var color='#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+                data.push({
+                    "label":items[i].title,
+                    "value":items[i].grade,
+                    "color":color
+                })
+            }
+            else {
+                break;
+            }
 
 
+        }
+        res.status(200).json({
+            message: 'Success',
+            obj: data
+        })
+    })
+})
+
+router.get('/:id',function (req,res,next) {
+
+    Item.findById(req.params.id).populate('publisher')
+        .populate('comments')
+        .populate('gradedBy')
+        .exec(function (err,item) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!item) {
+            return res.status(500).json({
+                title: 'No Item Found!',
+                error: {message: 'Item not found'}
+            });
+        }
+
+        return res.status(200).json({
+            message: 'Success',
+            obj: item
+        })
+
+    });
 
 });
-
-
 
 //checks if the user is logged in
 router.use('/', function (req, res, next) {
@@ -358,24 +450,32 @@ router.delete('/:id', function (req, res, next) {
                 error: {message: 'Item not found'}
             });
         }
-        for(var i=0;i<item.comments.length;i++)
+        if(item.comments!==undefined)
         {
-            Comment.findById(item.comments[i]).exec(function (err,comment) {
-                comment.remove();
-            })
-        }
-        item.remove(function (err, result) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
+            if(item.comments!=null)
+            {
+                for(var i=0;i<item.comments.length;i++)
+                {
+                    Comment.findById(item.comments[i]).exec(function (err,comment) {
+                        comment.remove();
+                    })
+                }
+                item.remove(function (err, result) {
+                    if (err) {
+                        return res.status(500).json({
+                            title: 'An error occurred',
+                            error: err
+                        });
+                    }
+                    res.status(200).json({
+                        message: 'Deleted item',
+                        obj: result
+                    });
                 });
             }
-            res.status(200).json({
-                message: 'Deleted item',
-                obj: result
-            });
-        });
+
+        }
+
     })
 
 });

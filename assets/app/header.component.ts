@@ -10,9 +10,9 @@ import {Router} from "@angular/router";
                 <div class="collapse navbar-collapse" id="myNavbar">
                  <ul class="nav navbar-nav">
                     <li  routerLinkActive="active"><a [routerLink]="['/search']" >Search</a></li>
-                    <li routerLinkActive="active"><a [routerLink]="['/item-list']">Review List</a></li>
                     <li *ngIf="isAdmin()" routerLinkActive="active"><a [routerLink]="['/item-input']">Review Input</a></li>
                     <li routerLinkActive="active"><a [routerLink]="['/category-list']">Categories</a></li>
+                    <li ><app-weather></app-weather></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li routerLinkActive="active"><a [routerLink]="['/auth']">Authentication</a></li>

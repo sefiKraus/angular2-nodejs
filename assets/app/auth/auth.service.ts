@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
 import 'rxjs/Rx';
 import { Observable } from "rxjs";
@@ -8,11 +8,16 @@ import forEach = require("core-js/fn/array/for-each");
 
 
 @Injectable()
-export class AuthService{
+export class AuthService implements OnInit{
     private users:User[];
 
 
     constructor(private http: Http,private errorService:ErrorService) {}
+
+    ngOnInit()
+    {
+        this.http.get('http://localhost:3000/user')
+    }
     signup(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
@@ -112,23 +117,23 @@ export class AuthService{
 
         var userRequested:User;
         var userRequesting:User;
-        for(var i=0;i<this.users.length;i++)
-        {
-            if(this.users[i].userId==id)
-            {
-                userRequested=this.users[i];
-            }
-            if(this.users[i].userId===localStorage.getItem('userId'))
-            {
-                userRequesting=this.users[i];
+        if(this.users!==undefined) {
+
+            for (var i = 0; i < this.users.length; i++) {
+                if (this.users[i].userId == id) {
+                    userRequested = this.users[i];
+                }
+                if (this.users[i].userId === localStorage.getItem('userId')) {
+                    userRequesting = this.users[i];
+                }
+
             }
 
+            if (userRequesting.role === 'admin') {
+                return userRequested;
+            }
         }
 
-        if(userRequesting.role==='admin')
-        {
-            return userRequested;
-        }
     }
 
     isLoggedIn()

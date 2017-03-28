@@ -9,7 +9,6 @@ var schema = new Schema({
     password: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     role:{type:String,required:true,default:'user'},
-    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
     graded:[{type:Schema.Types.ObjectId,ref:'Item'}]
 });
 

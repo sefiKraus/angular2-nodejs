@@ -45,9 +45,7 @@ export class GoogleMapsComponent implements OnInit{
             .subscribe((markers)=>
             {
                 this.markers=markers;
-                console.log(this.markers[0])
-           /*  var marker= new marker(markers[0].lat,markers[0].lng,markers[0].label,markers[0].draggable);
-                console.log(marker)*/
+
             })
 
     }

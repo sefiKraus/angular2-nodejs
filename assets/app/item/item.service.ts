@@ -5,6 +5,7 @@ import {ErrorService} from "../error/error.service";
 import {Item} from "./item.model";
 import {Observable} from "rxjs";
 import {User} from "../auth/user.model";
+import {error} from "util";
 
 @Injectable()
 export class ItemService{
@@ -21,6 +22,7 @@ export class ItemService{
                 return this.items[i];
             }
         }
+
     }
     getItemsByRegex(content:string)
     {
@@ -322,7 +324,7 @@ export class ItemService{
             ? '?token=' + localStorage.getItem('token')
             : '';
 
-        return this.http.patch('http://localhost:3000/item/rate' + item.itemId + token, body, {headers: headers})
+        return this.http.patch('http://localhost:3000/item/' + item.itemId + token, body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());

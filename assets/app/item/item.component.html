@@ -10,19 +10,20 @@
         </div>
         <div class="form-group">
             <label for="title">Title</label>
-            <input
+            <textarea
                     type="text"
                     id="title"
                     class="form-control"
-                    formControlName="title">
+                    formControlName="title"></textarea>
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <input
+            <textarea
+                    rows="8"
                     type="text"
                     id="content"
                     class="form-control"
-                    formControlName="content">
+                    formControlName="content"></textarea>
         </div>
         <img src="{{item.pictureLink}}" style="width:30%">
         <div class="form-group">
@@ -61,13 +62,7 @@
                     formControlName="grade">
 
         </div>
-        <div *ngIf="allowToRate">
-        <button
-                (click)="addRateToItem()"
-                class="btn btn-primary"
-                type="button"
-                    >Rate this review!</button>
-        </div>
+
         <button
                 class="btn btn-primary"
                 type="submit"
@@ -77,9 +72,18 @@
                 class="btn btn-primary"
                 type="button"
         >Delete Review</button>
+        <div class="container" *ngIf="isAllowToRate()">
+            <button
+                    (click)="addRateToItem()"
+                    class="btn btn-primary"
+                    type="button"
+            >Rate this review!</button>
+        </div>
     </form>
-   <app-comment-input [itemId]="item.itemId"></app-comment-input>
-    <app-comment-list [itemId]="item.itemId"></app-comment-list>
+        <app-comment-input [itemId]="item.itemId"></app-comment-input>
+        <app-comment-list [itemId]="item.itemId"></app-comment-list>
+
+
 </div>
 
 
